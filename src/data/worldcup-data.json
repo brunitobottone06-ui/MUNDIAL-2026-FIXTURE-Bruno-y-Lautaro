@@ -1,0 +1,347 @@
+{
+  "torneo": {
+    "nombre": "FIFA World Cup 2026™",
+    "edicion": 23,
+    "paises_sede": ["USA", "Canadá", "México"],
+    "inicio": "2026-06-11",
+    "final": "2026-07-19",
+    "sede_final": "MetLife Stadium, Nueva Jersey"
+  },
+
+  "estadios": [
+    { "id": "azteca",      "nombre": "Estadio Azteca",         "ciudad": "Ciudad de México", "pais": "MEX", "capacidad": 87523, "lat": 19.3029,  "lng": -99.1505 },
+    { "id": "metlife",     "nombre": "MetLife Stadium",        "ciudad": "Nueva Jersey",     "pais": "USA", "capacidad": 82500, "lat": 40.8128,  "lng": -74.0742 },
+    { "id": "att",         "nombre": "AT&T Stadium",           "ciudad": "Arlington, TX",    "pais": "USA", "capacidad": 80000, "lat": 32.7480,  "lng": -97.0930 },
+    { "id": "arrowhead",   "nombre": "Arrowhead Stadium",      "ciudad": "Kansas City, MO",  "pais": "USA", "capacidad": 76416, "lat": 39.0489,  "lng": -94.4839 },
+    { "id": "nrg",         "nombre": "NRG Stadium",            "ciudad": "Houston, TX",      "pais": "USA", "capacidad": 72220, "lat": 29.6847,  "lng": -95.4107 },
+    { "id": "mercedes",    "nombre": "Mercedes-Benz Stadium",  "ciudad": "Atlanta, GA",      "pais": "USA", "capacidad": 71000, "lat": 33.7554,  "lng": -84.4010 },
+    { "id": "sofi",        "nombre": "SoFi Stadium",           "ciudad": "Los Ángeles, CA",  "pais": "USA", "capacidad": 70240, "lat": 33.9535,  "lng": -118.3392 },
+    { "id": "lincoln",     "nombre": "Lincoln Financial Field","ciudad": "Philadelphia, PA",  "pais": "USA", "capacidad": 69796, "lat": 39.9008,  "lng": -75.1675 },
+    { "id": "lumen",       "nombre": "Lumen Field",            "ciudad": "Seattle, WA",      "pais": "USA", "capacidad": 69000, "lat": 47.5952,  "lng": -122.3316 },
+    { "id": "levis",       "nombre": "Levi's Stadium",         "ciudad": "Santa Clara, CA",  "pais": "USA", "capacidad": 68500, "lat": 37.4032,  "lng": -121.9698 },
+    { "id": "gillette",    "nombre": "Gillette Stadium",       "ciudad": "Boston, MA",       "pais": "USA", "capacidad": 65878, "lat": 42.0909,  "lng": -71.2643 },
+    { "id": "hardrock",    "nombre": "Hard Rock Stadium",      "ciudad": "Miami, FL",        "pais": "USA", "capacidad": 64767, "lat": 25.9580,  "lng": -80.2389 },
+    { "id": "bcplace",     "nombre": "BC Place",               "ciudad": "Vancouver",        "pais": "CAN", "capacidad": 54500, "lat": 49.2767,  "lng": -123.1118 },
+    { "id": "bbva",        "nombre": "Estadio BBVA",           "ciudad": "Monterrey",        "pais": "MEX", "capacidad": 51348, "lat": 25.6693,  "lng": -100.2385 },
+    { "id": "akron",       "nombre": "Estadio Akron",          "ciudad": "Guadalajara",      "pais": "MEX", "capacidad": 46232, "lat": 20.6466,  "lng": -103.4018 },
+    { "id": "bmo",         "nombre": "BMO Field",              "ciudad": "Toronto",          "pais": "CAN", "capacidad": 45736, "lat": 43.6333,  "lng": -79.4189 }
+  ],
+
+  "selecciones": {
+    "MEX": { "nombre": "México",           "grupo": "A", "bandera": "🇲🇽", "confederacion": "CONCACAF", "codigo_fifa": "MEX", "color_principal": "#006847", "color_secundario": "#FFFFFF" },
+    "RSA": { "nombre": "Sudáfrica",        "grupo": "A", "bandera": "🇿🇦", "confederacion": "CAF",      "codigo_fifa": "RSA", "color_principal": "#007A4D", "color_secundario": "#FFB81C" },
+    "KOR": { "nombre": "Corea del Sur",    "grupo": "A", "bandera": "🇰🇷", "confederacion": "AFC",      "codigo_fifa": "KOR", "color_principal": "#C60C30", "color_secundario": "#FFFFFF" },
+    "CZE": { "nombre": "Rep. Checa",       "grupo": "A", "bandera": "🇨🇿", "confederacion": "UEFA",     "codigo_fifa": "CZE", "color_principal": "#D7141A", "color_secundario": "#FFFFFF" },
+
+    "CAN": { "nombre": "Canadá",           "grupo": "B", "bandera": "🇨🇦", "confederacion": "CONCACAF", "codigo_fifa": "CAN", "color_principal": "#FF0000", "color_secundario": "#FFFFFF" },
+    "BIH": { "nombre": "Bosnia y Herz.",   "grupo": "B", "bandera": "🇧🇦", "confederacion": "UEFA",     "codigo_fifa": "BIH", "color_principal": "#003DA5", "color_secundario": "#FDCA30" },
+    "QAT": { "nombre": "Qatar",            "grupo": "B", "bandera": "🇶🇦", "confederacion": "AFC",      "codigo_fifa": "QAT", "color_principal": "#8D1B3D", "color_secundario": "#FFFFFF" },
+    "SUI": { "nombre": "Suiza",            "grupo": "B", "bandera": "🇨🇭", "confederacion": "UEFA",     "codigo_fifa": "SUI", "color_principal": "#FF0000", "color_secundario": "#FFFFFF" },
+
+    "BRA": { "nombre": "Brasil",           "grupo": "C", "bandera": "🇧🇷", "confederacion": "CONMEBOL", "codigo_fifa": "BRA", "color_principal": "#009C3B", "color_secundario": "#FFDF00" },
+    "MAR": { "nombre": "Marruecos",        "grupo": "C", "bandera": "🇲🇦", "confederacion": "CAF",      "codigo_fifa": "MAR", "color_principal": "#C1272D", "color_secundario": "#006233" },
+    "HAI": { "nombre": "Haití",            "grupo": "C", "bandera": "🇭🇹", "confederacion": "CONCACAF", "codigo_fifa": "HAI", "color_principal": "#00209F", "color_secundario": "#D21034" },
+    "SCO": { "nombre": "Escocia",          "grupo": "C", "bandera": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "confederacion": "UEFA",     "codigo_fifa": "SCO", "color_principal": "#003865", "color_secundario": "#FFFFFF" },
+
+    "USA": { "nombre": "Estados Unidos",   "grupo": "D", "bandera": "🇺🇸", "confederacion": "CONCACAF", "codigo_fifa": "USA", "color_principal": "#002868", "color_secundario": "#BF0A30" },
+    "PAR": { "nombre": "Paraguay",         "grupo": "D", "bandera": "🇵🇾", "confederacion": "CONMEBOL", "codigo_fifa": "PAR", "color_principal": "#D52B1E", "color_secundario": "#FFFFFF" },
+    "AUS": { "nombre": "Australia",        "grupo": "D", "bandera": "🇦🇺", "confederacion": "AFC",      "codigo_fifa": "AUS", "color_principal": "#00843D", "color_secundario": "#FFD700" },
+    "TUR": { "nombre": "Turquía",          "grupo": "D", "bandera": "🇹🇷", "confederacion": "UEFA",     "codigo_fifa": "TUR", "color_principal": "#E30A17", "color_secundario": "#FFFFFF" },
+
+    "GER": { "nombre": "Alemania",         "grupo": "E", "bandera": "🇩🇪", "confederacion": "UEFA",     "codigo_fifa": "GER", "color_principal": "#000000", "color_secundario": "#FFFFFF" },
+    "CUW": { "nombre": "Curazao",          "grupo": "E", "bandera": "🇨🇼", "confederacion": "CONCACAF", "codigo_fifa": "CUW", "color_principal": "#003DA5", "color_secundario": "#F9E300" },
+    "CIV": { "nombre": "Costa de Marfil",  "grupo": "E", "bandera": "🇨🇮", "confederacion": "CAF",      "codigo_fifa": "CIV", "color_principal": "#F77F00", "color_secundario": "#009A44" },
+    "ECU": { "nombre": "Ecuador",          "grupo": "E", "bandera": "🇪🇨", "confederacion": "CONMEBOL", "codigo_fifa": "ECU", "color_principal": "#FFD100", "color_secundario": "#003DA5" },
+
+    "NED": { "nombre": "Países Bajos",     "grupo": "F", "bandera": "🇳🇱", "confederacion": "UEFA",     "codigo_fifa": "NED", "color_principal": "#FF6900", "color_secundario": "#FFFFFF" },
+    "JPN": { "nombre": "Japón",            "grupo": "F", "bandera": "🇯🇵", "confederacion": "AFC",      "codigo_fifa": "JPN", "color_principal": "#BC002D", "color_secundario": "#FFFFFF" },
+    "SWE": { "nombre": "Suecia",           "grupo": "F", "bandera": "🇸🇪", "confederacion": "UEFA",     "codigo_fifa": "SWE", "color_principal": "#006AA7", "color_secundario": "#FECC02" },
+    "TUN": { "nombre": "Túnez",            "grupo": "F", "bandera": "🇹🇳", "confederacion": "CAF",      "codigo_fifa": "TUN", "color_principal": "#E70013", "color_secundario": "#FFFFFF" },
+
+    "BEL": { "nombre": "Bélgica",          "grupo": "G", "bandera": "🇧🇪", "confederacion": "UEFA",     "codigo_fifa": "BEL", "color_principal": "#EF3340", "color_secundario": "#000000" },
+    "EGY": { "nombre": "Egipto",           "grupo": "G", "bandera": "🇪🇬", "confederacion": "CAF",      "codigo_fifa": "EGY", "color_principal": "#CE1126", "color_secundario": "#FFFFFF" },
+    "IRN": { "nombre": "Irán",             "grupo": "G", "bandera": "🇮🇷", "confederacion": "AFC",      "codigo_fifa": "IRN", "color_principal": "#239F40", "color_secundario": "#FFFFFF" },
+    "NZL": { "nombre": "Nueva Zelanda",    "grupo": "G", "bandera": "🇳🇿", "confederacion": "OFC",      "codigo_fifa": "NZL", "color_principal": "#000000", "color_secundario": "#FFFFFF" },
+
+    "ESP": { "nombre": "España",           "grupo": "H", "bandera": "🇪🇸", "confederacion": "UEFA",     "codigo_fifa": "ESP", "color_principal": "#AA151B", "color_secundario": "#F1BF00" },
+    "CPV": { "nombre": "Cabo Verde",       "grupo": "H", "bandera": "🇨🇻", "confederacion": "CAF",      "codigo_fifa": "CPV", "color_principal": "#003893", "color_secundario": "#CF2027" },
+    "KSA": { "nombre": "Arabia Saudita",   "grupo": "H", "bandera": "🇸🇦", "confederacion": "AFC",      "codigo_fifa": "KSA", "color_principal": "#006C35", "color_secundario": "#FFFFFF" },
+    "URU": { "nombre": "Uruguay",          "grupo": "H", "bandera": "🇺🇾", "confederacion": "CONMEBOL", "codigo_fifa": "URU", "color_principal": "#75AADB", "color_secundario": "#FFFFFF" },
+
+    "FRA": { "nombre": "Francia",          "grupo": "I", "bandera": "🇫🇷", "confederacion": "UEFA",     "codigo_fifa": "FRA", "color_principal": "#002395", "color_secundario": "#ED2939" },
+    "SEN": { "nombre": "Senegal",          "grupo": "I", "bandera": "🇸🇳", "confederacion": "CAF",      "codigo_fifa": "SEN", "color_principal": "#00853F", "color_secundario": "#FDEF42" },
+    "IRQ": { "nombre": "Irak",             "grupo": "I", "bandera": "🇮🇶", "confederacion": "AFC",      "codigo_fifa": "IRQ", "color_principal": "#CE1126", "color_secundario": "#000000" },
+    "NOR": { "nombre": "Noruega",          "grupo": "I", "bandera": "🇳🇴", "confederacion": "UEFA",     "codigo_fifa": "NOR", "color_principal": "#EF2B2D", "color_secundario": "#FFFFFF" },
+
+    "ARG": { "nombre": "Argentina",        "grupo": "J", "bandera": "🇦🇷", "confederacion": "CONMEBOL", "codigo_fifa": "ARG", "color_principal": "#74ACDF", "color_secundario": "#FFFFFF" },
+    "ALG": { "nombre": "Argelia",          "grupo": "J", "bandera": "🇩🇿", "confederacion": "CAF",      "codigo_fifa": "ALG", "color_principal": "#006233", "color_secundario": "#FFFFFF" },
+    "AUT": { "nombre": "Austria",          "grupo": "J", "bandera": "🇦🇹", "confederacion": "UEFA",     "codigo_fifa": "AUT", "color_principal": "#ED2939", "color_secundario": "#FFFFFF" },
+    "JOR": { "nombre": "Jordania",         "grupo": "J", "bandera": "🇯🇴", "confederacion": "AFC",      "codigo_fifa": "JOR", "color_principal": "#007A3D", "color_secundario": "#FFFFFF" },
+
+    "POR": { "nombre": "Portugal",         "grupo": "K", "bandera": "🇵🇹", "confederacion": "UEFA",     "codigo_fifa": "POR", "color_principal": "#006600", "color_secundario": "#FF0000" },
+    "COD": { "nombre": "RD de Congo",      "grupo": "K", "bandera": "🇨🇩", "confederacion": "CAF",      "codigo_fifa": "COD", "color_principal": "#007FFF", "color_secundario": "#F7D618" },
+    "UZB": { "nombre": "Uzbekistán",       "grupo": "K", "bandera": "🇺🇿", "confederacion": "AFC",      "codigo_fifa": "UZB", "color_principal": "#1EB53A", "color_secundario": "#FFFFFF" },
+    "COL": { "nombre": "Colombia",         "grupo": "K", "bandera": "🇨🇴", "confederacion": "CONMEBOL", "codigo_fifa": "COL", "color_principal": "#FCD116", "color_secundario": "#003087" },
+
+    "ENG": { "nombre": "Inglaterra",       "grupo": "L", "bandera": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "confederacion": "UEFA",     "codigo_fifa": "ENG", "color_principal": "#FFFFFF", "color_secundario": "#CF081F" },
+    "CRO": { "nombre": "Croacia",          "grupo": "L", "bandera": "🇭🇷", "confederacion": "UEFA",     "codigo_fifa": "CRO", "color_principal": "#FF0000", "color_secundario": "#FFFFFF" },
+    "GHA": { "nombre": "Ghana",            "grupo": "L", "bandera": "🇬🇭", "confederacion": "CAF",      "codigo_fifa": "GHA", "color_principal": "#006B3F", "color_secundario": "#FCD116" },
+    "PAN": { "nombre": "Panamá",           "grupo": "L", "bandera": "🇵🇦", "confederacion": "CONCACAF", "codigo_fifa": "PAN", "color_principal": "#FFFFFF", "color_secundario": "#DA121A" }
+  },
+
+  "grupos": {
+    "A": { "equipos": ["MEX", "RSA", "KOR", "CZE"] },
+    "B": { "equipos": ["CAN", "BIH", "QAT", "SUI"] },
+    "C": { "equipos": ["BRA", "MAR", "HAI", "SCO"] },
+    "D": { "equipos": ["USA", "PAR", "AUS", "TUR"] },
+    "E": { "equipos": ["GER", "CUW", "CIV", "ECU"] },
+    "F": { "equipos": ["NED", "JPN", "SWE", "TUN"] },
+    "G": { "equipos": ["BEL", "EGY", "IRN", "NZL"] },
+    "H": { "equipos": ["ESP", "CPV", "KSA", "URU"] },
+    "I": { "equipos": ["FRA", "SEN", "IRQ", "NOR"] },
+    "J": { "equipos": ["ARG", "ALG", "AUT", "JOR"] },
+    "K": { "equipos": ["POR", "COD", "UZB", "COL"] },
+    "L": { "equipos": ["ENG", "CRO", "GHA", "PAN"] }
+  },
+
+  "partidos": [
+    {
+      "id": "A01", "fase": "grupos", "grupo": "A", "jornada": 1,
+      "local": "MEX", "visitante": "RSA",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-11", "hora_arg": "16:00",
+      "estadio_id": "azteca",
+      "eventos": []
+    },
+    {
+      "id": "A02", "fase": "grupos", "grupo": "A", "jornada": 1,
+      "local": "KOR", "visitante": "CZE",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-11", "hora_arg": "23:00",
+      "estadio_id": "akron",
+      "eventos": []
+    },
+    {
+      "id": "B01", "fase": "grupos", "grupo": "B", "jornada": 1,
+      "local": "CAN", "visitante": "BIH",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-12", "hora_arg": "16:00",
+      "estadio_id": "bmo",
+      "eventos": []
+    },
+    {
+      "id": "D01", "fase": "grupos", "grupo": "D", "jornada": 1,
+      "local": "USA", "visitante": "PAR",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-12", "hora_arg": "22:00",
+      "estadio_id": "sofi",
+      "eventos": []
+    },
+    {
+      "id": "B02", "fase": "grupos", "grupo": "B", "jornada": 1,
+      "local": "QAT", "visitante": "SUI",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-13", "hora_arg": "16:00",
+      "estadio_id": "levis",
+      "eventos": []
+    },
+    {
+      "id": "C01", "fase": "grupos", "grupo": "C", "jornada": 1,
+      "local": "BRA", "visitante": "MAR",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-13", "hora_arg": "19:00",
+      "estadio_id": "metlife",
+      "eventos": []
+    },
+    {
+      "id": "C02", "fase": "grupos", "grupo": "C", "jornada": 1,
+      "local": "HAI", "visitante": "SCO",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-13", "hora_arg": "22:00",
+      "estadio_id": "gillette",
+      "eventos": []
+    },
+    {
+      "id": "D02", "fase": "grupos", "grupo": "D", "jornada": 1,
+      "local": "AUS", "visitante": "TUR",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-14", "hora_arg": "01:00",
+      "estadio_id": "bcplace",
+      "eventos": []
+    },
+    {
+      "id": "E01", "fase": "grupos", "grupo": "E", "jornada": 1,
+      "local": "GER", "visitante": "CUW",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-14", "hora_arg": "14:00",
+      "estadio_id": "nrg",
+      "eventos": []
+    },
+    {
+      "id": "F01", "fase": "grupos", "grupo": "F", "jornada": 1,
+      "local": "NED", "visitante": "JPN",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-14", "hora_arg": "17:00",
+      "estadio_id": "att",
+      "eventos": []
+    },
+    {
+      "id": "E02", "fase": "grupos", "grupo": "E", "jornada": 1,
+      "local": "CIV", "visitante": "ECU",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-14", "hora_arg": "20:00",
+      "estadio_id": "lincoln",
+      "eventos": []
+    },
+    {
+      "id": "F02", "fase": "grupos", "grupo": "F", "jornada": 1,
+      "local": "SWE", "visitante": "TUN",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-14", "hora_arg": "23:00",
+      "estadio_id": "bbva",
+      "eventos": []
+    },
+    {
+      "id": "H01", "fase": "grupos", "grupo": "H", "jornada": 1,
+      "local": "ESP", "visitante": "CPV",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-15", "hora_arg": "13:00",
+      "estadio_id": "mercedes",
+      "eventos": []
+    },
+    {
+      "id": "G01", "fase": "grupos", "grupo": "G", "jornada": 1,
+      "local": "BEL", "visitante": "EGY",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-15", "hora_arg": "16:00",
+      "estadio_id": "lumen",
+      "eventos": []
+    },
+    {
+      "id": "H02", "fase": "grupos", "grupo": "H", "jornada": 1,
+      "local": "KSA", "visitante": "URU",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-15", "hora_arg": "19:00",
+      "estadio_id": "hardrock",
+      "eventos": []
+    },
+    {
+      "id": "G02", "fase": "grupos", "grupo": "G", "jornada": 1,
+      "local": "IRN", "visitante": "NZL",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-15", "hora_arg": "22:00",
+      "estadio_id": "sofi",
+      "eventos": []
+    },
+    {
+      "id": "I01", "fase": "grupos", "grupo": "I", "jornada": 1,
+      "local": "FRA", "visitante": "SEN",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-16", "hora_arg": "16:00",
+      "estadio_id": "metlife",
+      "eventos": []
+    },
+    {
+      "id": "I02", "fase": "grupos", "grupo": "I", "jornada": 1,
+      "local": "IRQ", "visitante": "NOR",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-16", "hora_arg": "19:00",
+      "estadio_id": "gillette",
+      "eventos": []
+    },
+    {
+      "id": "J01", "fase": "grupos", "grupo": "J", "jornada": 1,
+      "local": "ARG", "visitante": "ALG",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-16", "hora_arg": "22:00",
+      "estadio_id": "arrowhead",
+      "eventos": []
+    },
+    {
+      "id": "J02", "fase": "grupos", "grupo": "J", "jornada": 1,
+      "local": "AUT", "visitante": "JOR",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-17", "hora_arg": "01:00",
+      "estadio_id": "levis",
+      "eventos": []
+    },
+    {
+      "id": "K01", "fase": "grupos", "grupo": "K", "jornada": 1,
+      "local": "POR", "visitante": "COD",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-17", "hora_arg": "14:00",
+      "estadio_id": "nrg",
+      "eventos": []
+    },
+    {
+      "id": "L01", "fase": "grupos", "grupo": "L", "jornada": 1,
+      "local": "ENG", "visitante": "CRO",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-17", "hora_arg": "17:00",
+      "estadio_id": "att",
+      "eventos": []
+    },
+    {
+      "id": "L02", "fase": "grupos", "grupo": "L", "jornada": 1,
+      "local": "GHA", "visitante": "PAN",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-17", "hora_arg": "20:00",
+      "estadio_id": "bmo",
+      "eventos": []
+    },
+    {
+      "id": "K02", "fase": "grupos", "grupo": "K", "jornada": 1,
+      "local": "UZB", "visitante": "COL",
+      "goles_local": null, "goles_visitante": null,
+      "estado": "programado",
+      "fecha": "2026-06-17", "hora_arg": "23:00",
+      "estadio_id": "azteca",
+      "eventos": []
+    }
+  ],
+
+  "eliminatorias": {
+    "dieciseisavos": [],
+    "octavos": [],
+    "cuartos": [],
+    "semifinales": [],
+    "tercer_puesto": null,
+    "final": null
+  },
+
+  "llaves_eliminacion": {
+    "descripcion": "Se completa al finalizar la fase de grupos. 1° y 2° de cada grupo clasifican + 8 mejores 3°",
+    "criterio_clasificacion": ["puntos", "diferencia_goles", "goles_favor", "fair_play", "ranking_fifa"],
+    "estructura": {
+      "dieciseisavos": { "partidos": 16, "fechas": ["2026-06-30", "2026-07-06"] },
+      "octavos":       { "partidos": 8,  "fechas": ["2026-07-07", "2026-07-10"] },
+      "cuartos":       { "partidos": 4,  "fechas": ["2026-07-11", "2026-07-14"] },
+      "semifinales":   { "partidos": 2,  "fechas": ["2026-07-15", "2026-07-16"] },
+      "tercer_puesto": { "partidos": 1,  "fecha":  "2026-07-19" },
+      "final":         { "partidos": 1,  "fecha":  "2026-07-19", "estadio_id": "metlife" }
+    }
+  }
+}

@@ -1,0 +1,465 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/bebas-neue');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   TOKENS GLOBALES
+───────────────────────────────────────────────────────────── */
+:root {
+  --rojo:        #D10A11;
+  --oro:         #C8922A;
+  --oro-claro:   #E5B857;
+  --azul-noche:  #0A1628;
+  --azul-medio:  #152238;
+  --azul-acento: #1B3A6B;
+  --blanco:      #F5F0E8;
+  --verde-gol:   #00B341;
+  --gris:        #8A8A8A;
+
+  --shadow-oro:  0 0 24px rgba(200,146,42,0.45);
+  --shadow-rojo: 0 0 24px rgba(209,10,17,0.45);
+  --transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-fast:   180ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BASE
+───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: var(--azul-noche);
+  color: var(--blanco);
+  font-family: 'Barlow', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--azul-medio); }
+::-webkit-scrollbar-thumb { background: var(--oro); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--oro-claro); }
+
+
+/* ─────────────────────────────────────────────────────────────
+   KEYFRAMES — BRILLO METÁLICO (60 FPS: solo transform + opacity)
+───────────────────────────────────────────────────────────── */
+
+/* Reflejo de luz diagonal — sweep de izquierda a derecha */
+@keyframes shine-sweep {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(250%)  skewX(-15deg); }
+}
+
+/* Respiración del glow — usa opacity para no repintar */
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.55; transform: scale(1);    }
+  50%       { opacity: 1;    transform: scale(1.015); }
+}
+
+/* Gradiente de borde rotando (conic-gradient animado via hue-rotate) */
+@keyframes border-spin {
+  0%   { filter: hue-rotate(0deg);   }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Pulso de sombra dorada — solo opacity del pseudo-elemento */
+@keyframes shadow-pulse {
+  0%, 100% { opacity: 0; }
+  50%       { opacity: 1; }
+}
+
+/* Entrada desde abajo con clip */
+@keyframes reveal-up {
+  0%   { opacity: 0; transform: translateY(32px);  }
+  100% { opacity: 1; transform: translateY(0);     }
+}
+
+/* Entrada lateral */
+@keyframes reveal-left {
+  0%   { opacity: 0; transform: translateX(-24px); }
+  100% { opacity: 1; transform: translateX(0);     }
+}
+
+/* Shimmer CTA */
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Bounce pelota */
+@keyframes bounce-ball {
+  0%, 100% { transform: translateY(0)     scaleX(1);    }
+  45%       { transform: translateY(-22px) scaleX(0.93); }
+  55%       { transform: translateY(-22px) scaleX(0.93); }
+}
+
+/* Flip countdown */
+@keyframes flipDown {
+  0%   { transform: rotateX(0deg);   }
+  50%  { transform: rotateX(-90deg); }
+  100% { transform: rotateX(0deg);   }
+}
+
+/* Fade-up genérico */
+@keyframes fadeUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0);    }
+}
+
+/* Fade-in genérico */
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Spin lento */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   UTILIDADES CSS
+───────────────────────────────────────────────────────────── */
+@layer utilities {
+  .font-display { font-family: 'Bebas Neue', Impact, sans-serif; }
+  .animate-fade-up   { animation: fadeUp  0.5s ease forwards; }
+  .animate-fade-in   { animation: fadeIn  0.4s ease forwards; }
+  .animate-shimmer   { animation: shimmer 2.5s infinite linear; }
+  .animate-spin-slow { animation: spin-slow 8s linear infinite; }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   COMPONENTES
+───────────────────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Flip card countdown ─────────────────────────────────── */
+  .flip-card-face {
+    background: #0B1829;
+    border: 1px solid var(--oro);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Shine sweep continuo en el flip card */
+  .flip-card-face::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(229, 184, 87, 0.18) 50%,
+      transparent 70%
+    );
+    animation: shine-sweep 3s ease-in-out infinite;
+    will-change: transform;
+  }
+  .flip-card-face::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    width: 100%; height: 1px;
+    background: rgba(0,0,0,0.45);
+  }
+
+  /* ── Badge live / finished / scheduled ────────────────────── */
+  .badge-live      { @apply bg-rojo text-white text-xs font-condensed font-bold px-2 py-0.5 rounded animate-pulse; }
+  .badge-finished  { @apply bg-azul-acento text-blanco text-xs font-condensed px-2 py-0.5 rounded; }
+  .badge-scheduled { @apply bg-azul-medio text-gris text-xs font-condensed px-2 py-0.5 rounded; }
+
+
+  /* ── CTA Button — shimmer metálico dorado ─────────────────── */
+  .btn-cta {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+      90deg,
+      var(--oro) 0%,
+      var(--oro-claro) 40%,
+      #f0cc6e 50%,
+      var(--oro-claro) 60%,
+      var(--oro) 100%
+    );
+    background-size: 200% auto;
+    color: var(--azul-noche);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    transition: transform var(--transition-spring), box-shadow var(--transition-fast);
+    animation: shimmer 2.5s linear infinite;
+    will-change: transform;
+  }
+  .btn-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgba(255,255,255,0.35) 50%,
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .btn-cta:hover::after { opacity: 1; }
+  .btn-cta:hover {
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 0 28px rgba(200,146,42,0.65), 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .btn-cta:active { transform: scale(0.97); }
+
+
+  /* ── Card premium — brillo de borde metálico ─────────────── */
+  /*
+    Técnica: el glow está en un pseudo-elemento absoluto con
+    box-shadow, animado via opacity → 0 repintas de layout.
+  */
+  .card-premium {
+    position: relative;
+    background: var(--azul-medio);
+    border: 1px solid var(--azul-acento);
+    border-radius: 12px;
+    overflow: hidden;
+    transition:
+      transform var(--transition-spring),
+      border-color var(--transition-fast);
+    will-change: transform;
+    isolation: isolate;
+  }
+
+  /* Capa de glow — detrás del contenido */
+  .card-premium::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      var(--oro) 0%,
+      transparent 40%,
+      transparent 60%,
+      var(--oro-claro) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: -1;
+  }
+
+  /* Capa de shine sweep — la "luz que cruza" */
+  .card-premium::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 25%,
+      rgba(229, 184, 87, 0.12) 50%,
+      transparent 75%
+    );
+    opacity: 0;
+    transform: translateX(-100%) skewX(-15deg);
+    transition: opacity 0.2s;
+    will-change: transform;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .card-premium:hover {
+    transform: translateY(-5px) scale(1.015);
+    border-color: var(--oro);
+    box-shadow:
+      0 0 0 1px rgba(200,146,42,0.3),
+      0 8px 32px rgba(200,146,42,0.25),
+      0 20px 48px rgba(0,0,0,0.4);
+  }
+  .card-premium:hover::before { opacity: 1; }
+  .card-premium:hover::after  {
+    opacity: 1;
+    animation: shine-sweep 0.7s ease forwards;
+  }
+
+
+  /* ── Match row — hover estilo Norris (rápido, preciso) ────── */
+  .match-row {
+    position: relative;
+    overflow: hidden;
+    transition:
+      background-color var(--transition-fast),
+      transform var(--transition-fast),
+      border-color var(--transition-fast);
+    border-left: 3px solid transparent;
+    will-change: transform;
+  }
+  .match-row::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(200,146,42,0.06) 0%,
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+  }
+  .match-row:hover {
+    background-color: rgba(27,58,107,0.7);
+    transform: translateX(3px);
+    border-left-color: var(--rojo);
+  }
+  .match-row:hover::after { opacity: 1; }
+
+
+  /* ── Player card ──────────────────────────────────────────── */
+  .player-card {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+    will-change: transform;
+  }
+  .player-card:hover {
+    transform: scale(1.06) translateY(-4px);
+    box-shadow: 0 8px 24px rgba(200, 146, 42, 0.55);
+  }
+
+
+  /* ── Flag wipe reveal ─────────────────────────────────────── */
+  .flag-wrap {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transition: clip-path 0.35s ease;
+  }
+
+
+  /* ── Glow border animado (para trofeo / highlight cards) ──── */
+  .glow-border {
+    position: relative;
+    border-radius: 14px;
+    isolation: isolate;
+  }
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 16px;
+    background: conic-gradient(
+      from var(--angle, 0deg),
+      var(--oro)      0%,
+      var(--oro-claro) 15%,
+      transparent    30%,
+      transparent    70%,
+      var(--oro-claro) 85%,
+      var(--oro)      100%
+    );
+    animation: glow-breathe 2.8s ease-in-out infinite;
+    will-change: opacity, transform;
+    z-index: -1;
+  }
+  .glow-border::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 12px;
+    background: var(--azul-medio);
+    z-index: -1;
+  }
+
+
+  /* ── Sección reveal (para JS Intersection Observer) ──────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+
+  /* ── Nav link underline slide ─────────────────────────────── */
+  .nav-link-underline {
+    position: relative;
+  }
+  .nav-link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 50%;
+    width: 0; height: 2px;
+    background: var(--rojo);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: width 0.2s ease;
+  }
+  .nav-link-underline:hover::after { width: 100%; }
+
+
+  /* ── Stat bar ─────────────────────────────────────────────── */
+  .stat-bar-fill {
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--oro), var(--oro-claro));
+    transform-origin: left;
+    animation: reveal-left 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    will-change: transform;
+  }
+
+
+  /* ── Trofeo / hero glow container ────────────────────────── */
+  .trophy-glow {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Halo dorado difuso detrás */
+  .trophy-glow::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(200,146,42,0.35) 0%,
+      rgba(200,146,42,0.1)  40%,
+      transparent 70%
+    );
+    animation: glow-breathe 3s ease-in-out infinite;
+    will-change: opacity, transform;
+  }
+  /* Anillo de luz que rota */
+  .trophy-glow::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(var(--azul-noche), var(--azul-noche)) padding-box,
+      conic-gradient(
+        var(--oro) 0%, var(--oro-claro) 25%,
+        transparent 50%, var(--oro-claro) 75%, var(--oro) 100%
+      ) border-box;
+    animation: spin-slow 4s linear infinite;
+    will-change: transform;
+  }
+
+} /* end @layer components */

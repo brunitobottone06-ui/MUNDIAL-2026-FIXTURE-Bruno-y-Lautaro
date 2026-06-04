@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "PowerShell(Get-Command node, npm, pnpm, yarn -ErrorAction SilentlyContinue)",
+      "Bash(npm install *)",
+      "Bash(timeout 15 npm run build)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(node -e \"const g = require\\('./node_modules/gsap/package.json'\\); console.log\\(g.version\\)\")",
+      "Bash(node -e ' *)"
+    ]
+  }
+}
