@@ -2,10 +2,39 @@ import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import data from '../../data/worldcup-data.json'
+import { FlagImg } from '../../utils/flagUtils.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function GrupoTable({ letra, equipos }) {
+function calcStandings(equipos, partidos) {
+  const stats = {}
+  equipos.forEach(code => {
+    stats[code] = { pj: 0, g: 0, e: 0, p: 0, gf: 0, gc: 0 }
+  })
+  for (const partido of (partidos ?? [])) {
+    if (partido.estado === 'programado') continue
+    const { local, visitante, goles_local, goles_visitante } = partido
+    if (!stats[local] || !stats[visitante]) continue
+    const gl = goles_local     ?? 0
+    const gv = goles_visitante ?? 0
+    stats[local].pj++;    stats[visitante].pj++
+    stats[local].gf    += gl; stats[local].gc    += gv
+    stats[visitante].gf += gv; stats[visitante].gc += gl
+    if      (gl > gv) { stats[local].g++;     stats[visitante].p++ }
+    else if (gl < gv) { stats[visitante].g++;  stats[local].p++ }
+    else              { stats[local].e++;      stats[visitante].e++ }
+  }
+  return equipos
+    .map(code => ({
+      code,
+      ...stats[code],
+      pts: stats[code].g * 3 + stats[code].e,
+      dg:  stats[code].gf - stats[code].gc,
+    }))
+    .sort((a, b) => b.pts - a.pts || b.dg - a.dg || b.gf - a.gf)
+}
+
+export default function GrupoTable({ letra, equipos, partidos = [], standings = null }) {
   const tableRef = useRef(null)
 
   /* Stagger en filas al aparecer en viewport */
@@ -53,34 +82,49 @@ export default function GrupoTable({ letra, equipos }) {
   return (
     <div
       ref={tableRef}
-      className="rounded-xl overflow-hidden border border-azul-acento relative"
-      style={{ background: '#152238' }}
+      className="rounded-xl overflow-hidden relative"
+      style={{
+        background: 'linear-gradient(145deg, #152238 0%, #0D1929 55%, #111E30 100%)',
+        border: '1px solid rgba(27,58,107,0.8)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(200,146,42,0.08)',
+      }}
     >
-      {/* Header con acento dorado */}
+      {/* Header con acento dorado mejorado */}
       <div
         className="px-4 py-3 flex items-center justify-between relative overflow-hidden"
         style={{
-          background: 'linear-gradient(90deg, #1B3A6B 0%, #152238 100%)',
-          borderBottom: '1px solid rgba(200,146,42,0.25)',
+          background: 'linear-gradient(90deg, rgba(27,58,107,0.95) 0%, rgba(21,34,56,0.85) 60%, rgba(13,25,41,0.7) 100%)',
+          borderBottom: '1px solid rgba(200,146,42,0.3)',
         }}
       >
-        {/* Línea dorada decorativa izquierda */}
-        <div className="absolute left-0 top-0 bottom-0 w-0.5"
-          style={{ background: 'linear-gradient(to bottom, #C8922A, #E5B857, #C8922A)' }} />
+        {/* Línea dorada izquierda */}
+        <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r"
+          style={{ background: 'linear-gradient(to bottom, #E5B857, #C8922A, #E5B857)' }} />
+        {/* Shine sutil en header */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(105deg, transparent 30%, rgba(229,184,87,0.06) 50%, transparent 70%)' }} />
 
         <span
-          className="font-display text-xl tracking-wider pl-2"
-          style={{ fontFamily: "'Bebas Neue', Impact, sans-serif", color: '#C8922A' }}
+          className="font-display text-2xl tracking-widest pl-3 relative z-10"
+          style={{
+            fontFamily: "'Bebas Neue', Impact, sans-serif",
+            background: 'linear-gradient(90deg, #E5B857 0%, #C8922A 70%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
         >
           GRUPO {letra}
         </span>
 
-        {/* Mini shine sweep en hover del header */}
-        <div className="flex gap-1">
+        <div className="flex gap-1.5 items-center relative z-10">
           {equipos.map(codigo => (
-            <span key={codigo} className="text-xs" title={data.selecciones[codigo]?.nombre}>
-              {data.selecciones[codigo]?.bandera}
-            </span>
+            <FlagImg
+              key={codigo}
+              code={codigo}
+              alt={data.selecciones[codigo]?.nombre ?? codigo}
+              size={22}
+            />
           ))}
         </div>
       </div>
@@ -88,28 +132,33 @@ export default function GrupoTable({ letra, equipos }) {
       <table className="w-full text-sm">
         <thead>
           <tr
-            className="font-condensed text-[11px] tracking-wider uppercase"
-            style={{ color: '#8A8A8A', borderBottom: '1px solid rgba(27,58,107,0.6)' }}
+            className="font-condensed font-bold text-[11px] tracking-widest uppercase"
+            style={{
+              color: '#6a7a8f',
+              borderBottom: '1px solid rgba(200,146,42,0.15)',
+              background: 'rgba(13,25,41,0.5)',
+            }}
           >
-            <th className="px-4 py-2 text-left">Selección</th>
+            <th className="px-4 py-2 text-left">SELECCIÓN</th>
             <th className="px-1.5 py-2 text-center">PJ</th>
             <th className="px-1.5 py-2 text-center">G</th>
             <th className="px-1.5 py-2 text-center">E</th>
             <th className="px-1.5 py-2 text-center">P</th>
             <th className="px-1.5 py-2 text-center">DG</th>
-            <th className="px-1.5 py-2 text-center font-bold" style={{ color: '#F5F0E8' }}>PTS</th>
+            <th className="px-1.5 py-2 text-center font-bold" style={{ color: '#C8922A' }}>PTS</th>
           </tr>
         </thead>
 
         <tbody>
-          {equipos.map((codigo, i) => {
-            const sel = data.selecciones[codigo]
-            const isClasificado    = i < 2
-            const isPosibleClasif  = i === 2
+          {(standings ?? calcStandings(equipos, partidos)).map((row, i) => {
+            const sel = data.selecciones[row.code]
+            const isClasificado   = i < 2
+            const isPosibleClasif = i === 2
+            const cols = [row.pj, row.g, row.e, row.p, row.dg, row.pts]
 
             return (
               <tr
-                key={codigo}
+                key={row.code}
                 className="cursor-default"
                 style={{
                   borderBottom: i < equipos.length - 1 ? '1px solid rgba(27,58,107,0.4)' : 'none',
@@ -124,13 +173,13 @@ export default function GrupoTable({ letra, equipos }) {
               >
                 <td className="px-3 py-2.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-base leading-none">{sel?.bandera}</span>
+                    <FlagImg code={row.code} alt={sel?.nombre ?? row.code} size={26} />
                     <span className="font-condensed font-semibold text-blanco text-sm leading-tight">
-                      {sel?.nombre ?? codigo}
+                      {sel?.nombre ?? row.code}
                     </span>
                   </div>
                 </td>
-                {['0','0','0','0','0','0'].map((v, j) => (
+                {cols.map((v, j) => (
                   <td key={j} className="px-1.5 py-2.5 text-center font-condensed text-sm"
                     style={{ color: j === 5 ? '#F5F0E8' : '#8A8A8A', fontWeight: j === 5 ? 700 : 400 }}>
                     {v}

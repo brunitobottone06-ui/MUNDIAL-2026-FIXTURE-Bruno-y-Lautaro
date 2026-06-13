@@ -3,12 +3,12 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import data from '../data/worldcup-data.json'
 import MatchCard from '../components/fixture/MatchCard.jsx'
+import { useWCFixtures, useWCLive, mergeLive } from '../hooks/useFootballData.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const GRUPOS = ['Todos', 'A','B','C','D','E','F','G','H','I','J','K','L']
 
-/* Bloque de partidos de un día — anima sus hijos al aparecer */
 function DayBlock({ fecha, partidos }) {
   const blockRef = useRef(null)
 
@@ -17,39 +17,59 @@ function DayBlock({ fecha, partidos }) {
     if (!el) return
     const cards = el.querySelectorAll('.match-row')
     gsap.set(cards, { opacity: 0, x: -20 })
-
     const ctx = gsap.context(() => {
       gsap.to(cards, {
-        opacity: 1, x: 0,
-        duration: 0.55,
-        ease: 'power3.out',
+        opacity: 1, x: 0, duration: 0.55, ease: 'power3.out',
         stagger: { each: 0.06, ease: 'none' },
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-        },
+        scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
       })
     }, el)
-
     return () => ctx.revert()
   }, [partidos])
 
   return (
-    <div ref={blockRef}>
-      {/* Day header */}
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-1 h-5 rounded-full" style={{ background: 'linear-gradient(to bottom, #C8922A, #E5B857)' }} />
-        <h3 className="font-condensed text-blanco text-base tracking-wider">
+    <div ref={blockRef} className="mb-8">
+      {/* Encabezado de día — estilo editorial mundialista */}
+      <div
+        className="flex items-center gap-3 mb-3 px-3 py-2 rounded-lg relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(90deg, rgba(27,58,107,0.55) 0%, rgba(27,58,107,0.15) 70%, transparent 100%)',
+          borderLeft: '3px solid #C8922A',
+        }}
+      >
+        <h3
+          className="font-condensed font-bold text-sm tracking-widest uppercase"
+          style={{
+            background: 'linear-gradient(90deg, #E5B857 0%, #C8922A 60%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
           {formatFecha(fecha)}
         </h3>
-        <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, rgba(27,58,107,0.8), transparent)' }} />
-        <span className="font-condensed text-gris text-xs">{partidos.length} {partidos.length === 1 ? 'partido' : 'partidos'}</span>
+        <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, rgba(200,146,42,0.3), transparent)' }} />
+        <span
+          className="font-condensed font-bold text-xs px-2 py-0.5 rounded"
+          style={{ background: 'rgba(200,146,42,0.12)', color: '#C8922A', border: '1px solid rgba(200,146,42,0.25)' }}
+        >
+          {partidos.length} {partidos.length === 1 ? 'PARTIDO' : 'PARTIDOS'}
+        </span>
       </div>
-
-      <div className="space-y-2 mb-7">
+      <div className="space-y-2">
         {partidos.map(p => <MatchCard key={p.id} partido={p} />)}
       </div>
+    </div>
+  )
+}
+
+/* Skeleton de carga — muestra mientras llega la primera respuesta de la API */
+function LoadingSkeleton() {
+  return (
+    <div className="space-y-2 animate-pulse">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="h-14 rounded-xl" style={{ background: '#152238', opacity: 0.6 - i * 0.08 }} />
+      ))}
     </div>
   )
 }
@@ -57,6 +77,10 @@ function DayBlock({ fecha, partidos }) {
 export default function FixturePage() {
   const [filtroGrupo, setFiltroGrupo] = useState('Todos')
   const headerRef = useRef(null)
+
+  /* ── football-data.org hooks ── */
+  const { fixtures, loading, error } = useWCFixtures()
+  const { liveMatches, hasLive, lastSync } = useWCLive()
 
   /* GSAP entrance del header */
   useEffect(() => {
@@ -66,35 +90,69 @@ export default function FixturePage() {
     return () => ctx.revert()
   }, [])
 
+  /* Fuente de partidos: API (con overlay live) o JSON como fallback */
+  const allPartidos = useMemo(() => {
+    const base = fixtures.length > 0 ? fixtures : data.partidos
+    return base.map(p => mergeLive(p, liveMatches))
+  }, [fixtures, liveMatches])
+
   const partidos = useMemo(() => {
-    if (filtroGrupo === 'Todos') return data.partidos
-    return data.partidos.filter(p => p.grupo === filtroGrupo)
-  }, [filtroGrupo])
+    if (filtroGrupo === 'Todos') return allPartidos
+    return allPartidos.filter(p => p.grupo === filtroGrupo)
+  }, [allPartidos, filtroGrupo])
 
   const porFecha = useMemo(() => {
     return partidos.reduce((acc, p) => {
+      if (!p.fecha) return acc
       if (!acc[p.fecha]) acc[p.fecha] = []
       acc[p.fecha].push(p)
       return acc
     }, {})
   }, [partidos])
 
-  const totalPartidos = data.partidos.length
-
   return (
     <section>
       {/* Header */}
       <div ref={headerRef} className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
-          <p className="font-condensed text-gris text-xs tracking-widest mb-1">FASE DE GRUPOS · JUNIO 2026</p>
-          <h2 className="font-display text-4xl sm:text-5xl"
-            style={{ fontFamily: "'Bebas Neue', Impact, sans-serif", color: '#C8922A' }}>
-            FIXTURE
-          </h2>
+          <p className="font-condensed font-bold text-xs tracking-widest mb-1" style={{ color: '#8A8A8A' }}>FASE DE GRUPOS · JUNIO 2026</p>
+          <div className="flex items-center gap-3">
+            <h2
+              className="font-display text-gold-gradient"
+              style={{ fontFamily: "'Bebas Neue', Impact, sans-serif", fontSize: 'clamp(3rem, 7vw, 5rem)', lineHeight: 1 }}
+            >
+              FIXTURE
+            </h2>
+            {hasLive && (
+              <span
+                className="font-condensed font-bold text-sm px-3 py-1 rounded-lg"
+                style={{
+                  background: 'rgba(209,10,17,0.15)',
+                  border: '1px solid rgba(209,10,17,0.6)',
+                  color: '#ff4444',
+                  animation: 'glow-breathe 1.4s ease-in-out infinite',
+                }}
+              >
+                🔴 EN VIVO
+              </span>
+            )}
+          </div>
           <p className="font-condensed text-gris text-sm mt-0.5">
             {filtroGrupo === 'Todos'
-              ? `${totalPartidos} partidos · 12 grupos`
+              ? `${allPartidos.length} partidos · 12 grupos`
               : `${partidos.length} partidos · Grupo ${filtroGrupo}`}
+            {lastSync && (
+              <span className="ml-2" style={{ color: '#00B341', fontSize: '0.65rem' }}>
+                · Actualizado {lastSync.toLocaleTimeString('es-AR', {
+                  hour: '2-digit', minute: '2-digit', second: '2-digit'
+                })}
+              </span>
+            )}
+            {error && !fixtures.length && (
+              <span className="ml-2 text-[0.65rem]" style={{ color: '#C8922A' }}>
+                · Usando datos locales
+              </span>
+            )}
           </p>
         </div>
 
@@ -104,7 +162,7 @@ export default function FixturePage() {
             <button
               key={g}
               onClick={() => setFiltroGrupo(g)}
-              className="font-condensed text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150"
+              className="font-condensed text-xs font-semibold px-3 py-1.5 rounded-lg"
               style={{
                 background:   filtroGrupo === g ? '#D10A11' : '#152238',
                 color:        filtroGrupo === g ? '#fff'    : '#8A8A8A',
@@ -114,33 +172,39 @@ export default function FixturePage() {
               }}
               onMouseEnter={e => {
                 if (filtroGrupo !== g) {
-                  e.currentTarget.style.color     = '#F5F0E8'
+                  e.currentTarget.style.color      = '#F5F0E8'
                   e.currentTarget.style.background = '#1B3A6B'
                   e.currentTarget.style.transform  = 'scale(1.05)'
                 }
               }}
               onMouseLeave={e => {
                 if (filtroGrupo !== g) {
-                  e.currentTarget.style.color     = '#8A8A8A'
+                  e.currentTarget.style.color      = '#8A8A8A'
                   e.currentTarget.style.background = '#152238'
                   e.currentTarget.style.transform  = 'scale(1)'
                 }
               }}
             >
-              {g === 'Todos' ? 'TODOS' : `${g}`}
+              {g === 'Todos' ? 'TODOS' : g}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Partidos por fecha */}
-      <div>
-        {Object.entries(porFecha).map(([fecha, ps]) => (
-          <DayBlock key={fecha} fecha={fecha} partidos={ps} />
-        ))}
-      </div>
+      {/* Partidos */}
+      {loading && !fixtures.length ? (
+        <LoadingSkeleton />
+      ) : (
+        <div>
+          {Object.entries(porFecha)
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([fecha, ps]) => (
+              <DayBlock key={fecha} fecha={fecha} partidos={ps} />
+            ))}
+        </div>
+      )}
 
-      {partidos.length === 0 && (
+      {!loading && partidos.length === 0 && (
         <div className="text-center py-16">
           <span className="text-4xl animate-bounce-ball inline-block">⚽</span>
           <p className="font-condensed text-gris text-lg mt-3">Sin partidos para este grupo</p>

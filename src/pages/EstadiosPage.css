@@ -1,0 +1,596 @@
+/* ── Keyframes ─────────────────────────────────────────────── */
+
+@keyframes headerReveal {
+  from { opacity: 0; transform: translateY(-18px) }
+  to   { opacity: 1; transform: translateY(0) }
+}
+
+@keyframes titleShimmer {
+  from { background-position: 0% center }
+  to   { background-position: 200% center }
+}
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(24px) }
+  to   { opacity: 1; transform: translateY(0) }
+}
+
+@keyframes barFill {
+  from { transform: scaleX(0) }
+  to   { transform: scaleX(1) }
+}
+
+@keyframes backdropIn {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}
+
+@keyframes backdropOut {
+  from { opacity: 1 }
+  to   { opacity: 0 }
+}
+
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(44px) scale(0.97) }
+  to   { opacity: 1; transform: translateY(0) scale(1) }
+}
+
+@keyframes modalSlideDown {
+  from { opacity: 1; transform: translateY(0) scale(1) }
+  to   { opacity: 0; transform: translateY(44px) scale(0.97) }
+}
+
+@keyframes textCascade {
+  from { opacity: 0; transform: translateY(10px) }
+  to   { opacity: 1; transform: translateY(0) }
+}
+
+@keyframes dividerExpand {
+  from { transform: scaleX(0) }
+  to   { transform: scaleX(1) }
+}
+
+/* ── Page ────────────────────────────────────────────────────── */
+
+.estadios-page {
+  min-height: 60vh;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+
+.estadios-header {
+  margin-bottom: 2rem;
+  animation: headerReveal 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.estadios-header__eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #8A8A8A;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+}
+
+.estadios-header__title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  line-height: 1;
+  margin: 0 0 0.2rem;
+  background: linear-gradient(90deg, #C8922A 0%, #E5B857 35%, #f0cc6e 52%, #E5B857 65%, #C8922A 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleShimmer 5s linear infinite;
+}
+
+.estadios-header__subtitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #9ba6b4;
+  margin: 0 0 0.75rem;
+}
+
+/* Gold divider bajo el título */
+.estadios-header__divider {
+  height: 1px;
+  max-width: 360px;
+  background: linear-gradient(90deg, transparent, rgba(200,146,42,0.7) 30%, #E5B857 50%, rgba(200,146,42,0.7) 70%, transparent);
+  margin: 0.4rem 0 1.1rem;
+}
+
+/* Stats strip */
+.estadios-header__stats {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+
+.estadios-header__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+}
+
+.estadios-header__stat-n {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 2rem;
+  color: #F5F0E8;
+  line-height: 1;
+}
+
+.estadios-header__stat-l {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.63rem;
+  color: #8A8A8A;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.estadios-header__sep {
+  width: 1px;
+  height: 2.2rem;
+  background: rgba(27,58,107,0.9);
+}
+
+/* ── Filters ─────────────────────────────────────────────────── */
+
+.estadios-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.estadios-filter-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 1.1rem;
+  border-radius: 0.55rem;
+  border: 1px solid transparent;
+  background: #152238;
+  color: #8A8A8A;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: all 0.18s cubic-bezier(0.34,1.56,0.64,1);
+  user-select: none;
+}
+
+.estadios-filter-btn:hover {
+  background: #1B3A6B;
+  color: #F5F0E8;
+  transform: scale(1.04);
+}
+
+.estadios-filter-btn--active {
+  background: #D10A11;
+  color: #fff;
+  border-color: rgba(209,10,17,0.55);
+  box-shadow: 0 0 16px rgba(209,10,17,0.35);
+  transform: scale(1.05);
+}
+
+/* ── Grid ────────────────────────────────────────────────────── */
+
+.estadios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+
+.stadium-card {
+  background: linear-gradient(145deg, #152238 0%, #0D1929 55%, #111E30 100%);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  border: 1px solid rgba(27,58,107,0.75);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(200,146,42,0.06);
+  cursor: pointer;
+  outline: none;
+  animation: cardReveal 0.55s cubic-bezier(0.16,1,0.3,1) both;
+  transition:
+    transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+    box-shadow 0.3s ease,
+    border-color 0.2s ease;
+  will-change: transform;
+}
+
+.stadium-card:hover,
+.stadium-card:focus-visible {
+  transform: translateY(-8px) scale(1.018);
+  box-shadow: 0 18px 52px rgba(200,146,42,0.28);
+  border-color: #C8922A;
+}
+
+/* Image */
+.stadium-card__image {
+  position: relative;
+  height: 162px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: filter 0.3s ease;
+}
+
+.stadium-card:hover .stadium-card__image {
+  filter: brightness(1.08);
+}
+
+.stadium-card__badge {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  padding: 0.22rem 0.55rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stadium-card__hover-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.8rem;
+  background: linear-gradient(to top, rgba(10,22,40,0.65), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.stadium-card:hover .stadium-card__hover-overlay {
+  opacity: 1;
+}
+
+.stadium-card__cta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #E5B857;
+  text-transform: uppercase;
+  transform: translateY(8px);
+  transition: transform 0.22s ease;
+}
+
+.stadium-card:hover .stadium-card__cta {
+  transform: translateY(0);
+}
+
+/* Body */
+.stadium-card__body {
+  padding: 1rem 1rem 0.875rem;
+}
+
+.stadium-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.4rem;
+  margin-bottom: 0.15rem;
+}
+
+.stadium-card__name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #F5F0E8;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.stadium-card__flag {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.stadium-card__city {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.7rem;
+  color: #8A8A8A;
+  margin: 0 0 0.5rem;
+}
+
+.stadium-card__short-desc {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.76rem;
+  color: #9ba6b4;
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.stadium-card__stats {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.stadium-card__stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stadium-card__stat-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #C8922A;
+  line-height: 1;
+}
+
+.stadium-card__stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.58rem;
+  color: #8A8A8A;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* Capacity bar */
+.stadium-card__bar-track {
+  height: 2px;
+  background: rgba(27,58,107,0.55);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.stadium-card__bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #C8922A, #E5B857);
+  border-radius: 99px;
+  transform-origin: left;
+  animation: barFill 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+}
+
+/* ── Modal ───────────────────────────────────────────────────── */
+
+.stadium-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(4, 10, 22, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: backdropIn 0.22s ease both;
+}
+
+.stadium-modal__backdrop--closing {
+  animation: backdropOut 0.28s ease both;
+}
+
+.stadium-modal__panel {
+  background: #0D1B30;
+  border: 1px solid rgba(200,146,42,0.22);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  width: 100%;
+  max-width: 660px;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow:
+    0 32px 80px rgba(0,0,0,0.72),
+    0 0 0 1px rgba(200,146,42,0.08);
+  animation: modalSlideUp 0.4s cubic-bezier(0.16,1,0.3,1) both;
+  scrollbar-width: thin;
+  scrollbar-color: #1B3A6B transparent;
+}
+
+.stadium-modal__panel--closing {
+  animation: modalSlideDown 0.28s cubic-bezier(0.55,0,1,0.45) both;
+}
+
+/* Hero image */
+.stadium-modal__hero {
+  position: relative;
+  height: 230px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.stadium-modal__hero-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.stadium-modal__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: rgba(10,22,40,0.75);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(200,146,42,0.28);
+  color: #F5F0E8;
+  font-size: 0.88rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.stadium-modal__close:hover {
+  background: rgba(209,10,17,0.75);
+  transform: scale(1.12);
+}
+
+/* Modal body */
+.stadium-modal__body {
+  padding: 1.5rem 1.75rem 2rem;
+}
+
+/* Staggered cascade: every direct child with animation-delay set inline */
+.stadium-modal__title-row,
+.stadium-modal__location,
+.stadium-modal__stats-row,
+.stadium-modal__divider,
+.stadium-modal__desc,
+.stadium-modal__coords {
+  opacity: 0;
+  animation: textCascade 0.42s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.stadium-modal__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.3rem;
+}
+
+.stadium-modal__name {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  color: #C8922A;
+  line-height: 1;
+  margin: 0;
+}
+
+.stadium-modal__flag {
+  font-size: 2.2rem;
+  flex-shrink: 0;
+  padding-top: 0.2rem;
+}
+
+.stadium-modal__location {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  color: #8A8A8A;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.03em;
+}
+
+/* Stats pills */
+.stadium-modal__stats-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.stadium-modal__stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex: 1;
+  min-width: 110px;
+  background: rgba(27,58,107,0.35);
+  border: 1px solid rgba(27,58,107,0.55);
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.9rem;
+}
+
+.stadium-modal__stat-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.stadium-modal__stat-value {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #F5F0E8;
+  line-height: 1;
+}
+
+.stadium-modal__stat-key {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  color: #8A8A8A;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.stadium-modal__divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(200,146,42,0.45), transparent);
+  margin-bottom: 1.2rem;
+  transform-origin: left;
+  animation: dividerExpand 0.5s cubic-bezier(0.16,1,0.3,1) forwards !important;
+}
+
+.stadium-modal__desc {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #c0c9d6;
+  margin-bottom: 1.1rem;
+}
+
+.stadium-modal__coords {
+  font-family: 'Barlow Condensed', monospace;
+  font-size: 0.7rem;
+  color: #8A8A8A;
+  letter-spacing: 0.04em;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .estadios-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .estadios-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .stadium-card__image {
+    height: 130px;
+  }
+  .stadium-card__short-desc {
+    display: none;
+  }
+  .stadium-modal__hero {
+    height: 185px;
+  }
+  .stadium-modal__body {
+    padding: 1.25rem 1.25rem 1.75rem;
+  }
+  .stadium-modal__stats-row {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 380px) {
+  .estadios-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,309 @@
+/* ════════════════════════════════════════════════════════════
+   PlayerCard — estadísticas individuales del Mundial
+════════════════════════════════════════════════════════════ */
+
+.player-card {
+  --c-bg:         #152238;
+  --c-border:     rgba(27, 58, 107, 0.7);
+  --c-border-h:   rgba(200, 146, 42, 0.6);
+  --c-gold:       #C8922A;
+  --c-gold-light: #E5B857;
+  --c-red:        #D10A11;
+  --c-green:      #00B341;
+  --c-white:      #F5F0E8;
+  --c-gray:       #8A8A8A;
+
+  position: relative;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    border-color 200ms ease,
+    box-shadow   250ms ease,
+    transform    300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+.player-card:hover {
+  border-color: var(--c-border-h);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(200, 146, 42, 0.15),
+    inset 0 1px 0 rgba(229, 184, 87, 0.08);
+  transform: translateY(-4px);
+}
+
+/* ── Foto del jugador ── */
+.player-card__photo-wrap {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0A1628, #1B3A6B);
+}
+
+.player-card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(15%) brightness(0.9);
+  transition: transform 400ms ease, filter 300ms ease;
+}
+
+.player-card:hover .player-card__photo {
+  transform: scale(1.06);
+  filter: grayscale(0%) brightness(1);
+}
+
+/* Gradiente que difumina la foto hacia abajo */
+.player-card__photo-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, transparent, var(--c-bg));
+  pointer-events: none;
+}
+
+/* Avatar CSS con iniciales */
+.player-card__avatar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-card__avatar-initials {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.05em;
+}
+
+/* Foto placeholder */
+.player-card__photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: radial-gradient(ellipse at center, #1B3A6B 0%, #0A1628 100%);
+  color: rgba(138,138,138,0.4);
+}
+
+/* Badge de posición sobre la foto */
+.player-card__pos {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.player-card__pos--at  { background: rgba(209,10,17,0.85);  color: #fff; }
+.player-card__pos--md  { background: rgba(200,146,42,0.85); color: #0A1628; }
+.player-card__pos--df  { background: rgba(27,58,107,0.9);   color: #F5F0E8; }
+.player-card__pos--gk  { background: rgba(0,179,65,0.85);   color: #fff; }
+
+/* Número de dorsal */
+.player-card__number {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: rgba(245, 240, 232, 0.18);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Info principal ── */
+.player-card__body {
+  padding: 10px 12px 12px;
+}
+
+.player-card__name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--c-white);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-card__age {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.7rem;
+  color: var(--c-gray);
+  margin-bottom: 10px;
+}
+
+/* ── Estadísticas ── */
+.player-card__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.player-card__stat {
+  background: rgba(10, 22, 40, 0.6);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.player-card__stat-value {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--c-gold);
+}
+
+.player-card__stat-value--red   { color: var(--c-red); }
+.player-card__stat-value--green { color: var(--c-green); }
+.player-card__stat-value--gray  { color: var(--c-gray); }
+
+.player-card__stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--c-gray);
+  text-transform: uppercase;
+}
+
+/* ── Barra de minutos jugados ── */
+.player-card__minutes-wrap {
+  margin-top: 8px;
+}
+
+.player-card__minutes-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.player-card__minutes-key {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--c-gray);
+  text-transform: uppercase;
+}
+
+.player-card__minutes-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--c-white);
+}
+
+.player-card__minutes-track {
+  height: 3px;
+  background: rgba(27, 58, 107, 0.7);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.player-card__minutes-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #C8922A, #E5B857);
+  transform-origin: left;
+  animation: minutesFill 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--bar-delay, 0s);
+}
+
+@keyframes minutesFill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(var(--bar-pct, 0)); }
+}
+
+/* ── Shine del player card ── */
+.player-card__shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    rgba(229,184,87,0.12) 45%,
+    rgba(255,255,255,0.06) 50%,
+    rgba(229,184,87,0.12) 55%,
+    transparent 75%
+  );
+  opacity: 0;
+}
+
+@keyframes playerShine {
+  0%   { transform: translateX(-110%) skewX(-12deg); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateX(210%)  skewX(-12deg); opacity: 0; }
+}
+
+.player-card:hover .player-card__shine {
+  animation: playerShine 0.6s ease forwards;
+}
+
+/* ── Entrada con stagger ── */
+@keyframes playerReveal {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+.player-card--reveal {
+  animation: playerReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ── Skeleton de carga ── */
+.player-card--skeleton {
+  pointer-events: none;
+  animation: skeletonPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes skeletonPulse {
+  from { opacity: 0.45; }
+  to   { opacity: 0.7;  }
+}
+
+.player-card--skeleton .player-card__photo-wrap {
+  background: linear-gradient(90deg, #152238 25%, #1B3A6B 50%, #152238 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease infinite;
+}
+
+@keyframes skeletonShimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+.player-card--skeleton .player-card__name,
+.player-card--skeleton .player-card__age,
+.player-card--skeleton .player-card__stat {
+  background: rgba(27, 58, 107, 0.5);
+  border-radius: 4px;
+  color: transparent;
+}

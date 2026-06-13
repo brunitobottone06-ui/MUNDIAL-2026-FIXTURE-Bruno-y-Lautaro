@@ -1,0 +1,323 @@
+/* ════════════════════════════════════════════════════════════
+   PlayerModal — overlay con plantilla completa del equipo
+════════════════════════════════════════════════════════════ */
+
+/* ── Backdrop ── */
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes backdropOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.player-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5, 12, 25, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 16px 40px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: backdropIn 0.25s ease forwards;
+}
+
+.player-modal__backdrop--closing {
+  animation: backdropOut 0.2s ease forwards;
+}
+
+/* ── Panel principal ── */
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes panelOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+}
+
+.player-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  background: #0E1E35;
+  border: 1px solid rgba(27, 58, 107, 0.8);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(200, 146, 42, 0.12);
+  animation: panelIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.player-modal__panel--closing {
+  animation: panelOut 0.2s ease forwards;
+}
+
+/* ── Header del equipo ── */
+.player-modal__header {
+  position: relative;
+  padding: 28px 24px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(27, 58, 107, 0.6);
+}
+
+/* Fondo decorativo del header */
+.player-modal__header-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 120% at 20% 50%, rgba(200,146,42,0.07), transparent),
+    linear-gradient(to right, rgba(21,34,56,0.9), transparent 70%);
+  pointer-events: none;
+}
+
+/* Línea dorada superior */
+.player-modal__header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #C8922A, #E5B857, #C8922A);
+}
+
+.player-modal__team-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 16px rgba(200,146,42,0.4));
+  position: relative;
+  z-index: 1;
+}
+
+.player-modal__team-logo-placeholder {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.player-modal__team-info {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.player-modal__team-name {
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: #F5F0E8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin: 0 0 4px;
+}
+
+.player-modal__team-meta {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+  color: #8A8A8A;
+}
+
+.player-modal__team-meta strong {
+  color: #C8922A;
+  font-weight: 600;
+}
+
+/* Botón cerrar */
+.player-modal__close {
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(27, 58, 107, 0.8);
+  background: rgba(10, 22, 40, 0.7);
+  color: #8A8A8A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  transition:
+    background     150ms ease,
+    border-color   150ms ease,
+    color          150ms ease,
+    transform      250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.player-modal__close:hover {
+  background: rgba(209, 10, 17, 0.85);
+  border-color: transparent;
+  color: #fff;
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ── Estado de carga dentro del modal ── */
+.player-modal__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 60px 24px;
+}
+
+@keyframes spinRing {
+  to { transform: rotate(360deg); }
+}
+
+.player-modal__spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(27, 58, 107, 0.5);
+  border-top-color: #C8922A;
+  border-radius: 50%;
+  animation: spinRing 0.8s linear infinite;
+}
+
+.player-modal__loading-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: #8A8A8A;
+  text-transform: uppercase;
+}
+
+/* ── Estado de error ── */
+.player-modal__error {
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.player-modal__error-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.player-modal__error-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  color: #D10A11;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.player-modal__error-msg {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+  color: #8A8A8A;
+  max-width: 400px;
+  margin: 0 auto 16px;
+}
+
+.player-modal__retry-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 2px solid #C8922A;
+  background: transparent;
+  color: #C8922A;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease, transform 200ms ease;
+}
+
+.player-modal__retry-btn:hover {
+  background: #C8922A;
+  color: #0A1628;
+  transform: scale(1.04);
+}
+
+/* ── Estado vacío ── */
+.player-modal__empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: #8A8A8A;
+}
+
+.player-modal__empty-icon  { font-size: 2.5rem; margin-bottom: 12px; }
+.player-modal__empty-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  color: #F5F0E8;
+  margin-bottom: 6px;
+}
+.player-modal__empty-sub {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+}
+
+/* ── Grid de jugadores ── */
+.player-modal__body {
+  padding: 20px 20px 24px;
+}
+
+.player-modal__count {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: #8A8A8A;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.player-modal__count strong {
+  color: #C8922A;
+}
+
+.player-modal__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .player-modal__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .player-modal__header {
+    flex-wrap: wrap;
+  }
+  .player-modal__team-logo,
+  .player-modal__team-logo-placeholder {
+    width: 56px;
+    height: 56px;
+  }
+}

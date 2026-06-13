@@ -9,22 +9,22 @@
   },
 
   "estadios": [
-    { "id": "azteca",      "nombre": "Estadio Azteca",         "ciudad": "Ciudad de México", "pais": "MEX", "capacidad": 87523, "lat": 19.3029,  "lng": -99.1505 },
-    { "id": "metlife",     "nombre": "MetLife Stadium",        "ciudad": "Nueva Jersey",     "pais": "USA", "capacidad": 82500, "lat": 40.8128,  "lng": -74.0742 },
-    { "id": "att",         "nombre": "AT&T Stadium",           "ciudad": "Arlington, TX",    "pais": "USA", "capacidad": 80000, "lat": 32.7480,  "lng": -97.0930 },
-    { "id": "arrowhead",   "nombre": "Arrowhead Stadium",      "ciudad": "Kansas City, MO",  "pais": "USA", "capacidad": 76416, "lat": 39.0489,  "lng": -94.4839 },
-    { "id": "nrg",         "nombre": "NRG Stadium",            "ciudad": "Houston, TX",      "pais": "USA", "capacidad": 72220, "lat": 29.6847,  "lng": -95.4107 },
-    { "id": "mercedes",    "nombre": "Mercedes-Benz Stadium",  "ciudad": "Atlanta, GA",      "pais": "USA", "capacidad": 71000, "lat": 33.7554,  "lng": -84.4010 },
-    { "id": "sofi",        "nombre": "SoFi Stadium",           "ciudad": "Los Ángeles, CA",  "pais": "USA", "capacidad": 70240, "lat": 33.9535,  "lng": -118.3392 },
-    { "id": "lincoln",     "nombre": "Lincoln Financial Field","ciudad": "Philadelphia, PA",  "pais": "USA", "capacidad": 69796, "lat": 39.9008,  "lng": -75.1675 },
-    { "id": "lumen",       "nombre": "Lumen Field",            "ciudad": "Seattle, WA",      "pais": "USA", "capacidad": 69000, "lat": 47.5952,  "lng": -122.3316 },
-    { "id": "levis",       "nombre": "Levi's Stadium",         "ciudad": "Santa Clara, CA",  "pais": "USA", "capacidad": 68500, "lat": 37.4032,  "lng": -121.9698 },
-    { "id": "gillette",    "nombre": "Gillette Stadium",       "ciudad": "Boston, MA",       "pais": "USA", "capacidad": 65878, "lat": 42.0909,  "lng": -71.2643 },
-    { "id": "hardrock",    "nombre": "Hard Rock Stadium",      "ciudad": "Miami, FL",        "pais": "USA", "capacidad": 64767, "lat": 25.9580,  "lng": -80.2389 },
-    { "id": "bcplace",     "nombre": "BC Place",               "ciudad": "Vancouver",        "pais": "CAN", "capacidad": 54500, "lat": 49.2767,  "lng": -123.1118 },
-    { "id": "bbva",        "nombre": "Estadio BBVA",           "ciudad": "Monterrey",        "pais": "MEX", "capacidad": 51348, "lat": 25.6693,  "lng": -100.2385 },
-    { "id": "akron",       "nombre": "Estadio Akron",          "ciudad": "Guadalajara",      "pais": "MEX", "capacidad": 46232, "lat": 20.6466,  "lng": -103.4018 },
-    { "id": "bmo",         "nombre": "BMO Field",              "ciudad": "Toronto",          "pais": "CAN", "capacidad": 45736, "lat": 43.6333,  "lng": -79.4189 }
+    { "id": "azteca",      "nombre": "Estadio Azteca",         "ciudad": "Ciudad de México", "pais": "MEX", "capacidad": 87523, "lat": 19.3029,  "lng": -99.1505,  "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Vista_a%C3%A9rea_del_Estadio_Azteca_-_2026_-_02.jpg/330px-Vista_a%C3%A9rea_del_Estadio_Azteca_-_2026_-_02.jpg" },
+    { "id": "metlife",     "nombre": "MetLife Stadium",        "ciudad": "Nueva Jersey",     "pais": "USA", "capacidad": 82500, "lat": 40.8128,  "lng": -74.0742,  "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCYAp6jPr0LZZOsaQg88bo1iSfjMQltGIjqw&s" },
+    { "id": "att",         "nombre": "AT&T Stadium",           "ciudad": "Arlington, TX",    "pais": "USA", "capacidad": 80000, "lat": 32.7480,  "lng": -97.0930,  "imagen": "https://attstadium.com/wp-content/uploads/2025/02/stadium-aerial-600x450-1.jpg" },
+    { "id": "arrowhead",   "nombre": "Arrowhead Stadium",      "ciudad": "Kansas City, MO",  "pais": "USA", "capacidad": 76416, "lat": 39.0489,  "lng": -94.4839,  "imagen": "https://www.archpaper.com/wp-content/uploads/2024/02/caojicquyzq9uf8auwgs.jpeg" },
+    { "id": "nrg",         "nombre": "NRG Stadium",            "ciudad": "Houston, TX",      "pais": "USA", "capacidad": 72220, "lat": 29.6847,  "lng": -95.4107,  "imagen": "https://www.aramark.com/content/dam/aramark/en/about/newsroom/news-articles/2023/november-2023/302087527_10166445114435391_1683448567294807585_n.jpg" },
+    { "id": "mercedes",    "nombre": "Mercedes-Benz Stadium",  "ciudad": "Atlanta, GA",      "pais": "USA", "capacidad": 71000, "lat": 33.7554,  "lng": -84.4010,  "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo4s7-hLkSG_quZROQ4ZjFFn1h7_0plc119Q&s" },
+    { "id": "sofi",        "nombre": "SoFi Stadium",           "ciudad": "Los Ángeles, CA",  "pais": "USA", "capacidad": 70240, "lat": 33.9535,  "lng": -118.3392, "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunAQb_zkGXOSR1tByGoDiNf7b9YMC5sAGTQ&s" },
+    { "id": "lincoln",     "nombre": "Lincoln Financial Field","ciudad": "Philadelphia, PA",  "pais": "USA", "capacidad": 69796, "lat": 39.9008,  "lng": -75.1675,  "imagen": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Lincoln_Financial_Field_%28Aerial_view%29.jpg" },
+    { "id": "lumen",       "nombre": "Lumen Field",            "ciudad": "Seattle, WA",      "pais": "USA", "capacidad": 69000, "lat": 47.5952,  "lng": -122.3316, "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHYu_w6QoMUmWyc8g5_Cp07FrUKfruZvo-IQ&s" },
+    { "id": "levis",       "nombre": "Levi's Stadium",         "ciudad": "Santa Clara, CA",  "pais": "USA", "capacidad": 68500, "lat": 37.4032,  "lng": -121.9698, "imagen": "https://anningjohnson.com/wp-content/uploads/2017/11/levis-stadium-3.jpg" },
+    { "id": "gillette",    "nombre": "Gillette Stadium",       "ciudad": "Boston, MA",       "pais": "USA", "capacidad": 65878, "lat": 42.0909,  "lng": -71.2643,  "imagen": "https://www.lavoz.com.ar/resizer/v2/DSGVCK6LKJFENFBB6AGOYW4EWQ.webp" },
+    { "id": "hardrock",    "nombre": "Hard Rock Stadium",      "ciudad": "Miami, FL",        "pais": "USA", "capacidad": 64767, "lat": 25.9580,  "lng": -80.2389,  "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR90X7ZfAkBw9pPKcvqmK1t5-1qFzPruOuuVQ&s" },
+    { "id": "bcplace",     "nombre": "BC Place",               "ciudad": "Vancouver",        "pais": "CAN", "capacidad": 54500, "lat": 49.2767,  "lng": -123.1118, "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDPigogyCXAyJulYpV9Aq7W7YMEL8C3R5R_g&s" },
+    { "id": "bbva",        "nombre": "Estadio BBVA",           "ciudad": "Monterrey",        "pais": "MEX", "capacidad": 51348, "lat": 25.6693,  "lng": -100.2385, "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Mexico_Guadalupe_Monterrey_Estadio_BBVA_Bancomer_fifa_world_cup_2026_6.JPG/250px-Mexico_Guadalupe_Monterrey_Estadio_BBVA_Bancomer_fifa_world_cup_2026_6.JPG" },
+    { "id": "akron",       "nombre": "Estadio Akron",          "ciudad": "Guadalajara",      "pais": "MEX", "capacidad": 46232, "lat": 20.6466,  "lng": -103.4018, "imagen": "https://upload.wikimedia.org/wikipedia/commons/a/a7/EstadioAkronGDL.jpg" },
+    { "id": "bmo",         "nombre": "BMO Field",              "ciudad": "Toronto",          "pais": "CAN", "capacidad": 45736, "lat": 43.6333,  "lng": -79.4189,  "imagen": "https://cdn.eldestapeweb.com/eldestape/052026/1779476431876.jpg?&cw=1200&ch=675" }
   ],
 
   "selecciones": {
@@ -108,8 +108,8 @@
     {
       "id": "A01", "fase": "grupos", "grupo": "A", "jornada": 1,
       "local": "MEX", "visitante": "RSA",
-      "goles_local": null, "goles_visitante": null,
-      "estado": "programado",
+      "goles_local": 2, "goles_visitante": 0,
+      "estado": "finalizado",
       "fecha": "2026-06-11", "hora_arg": "16:00",
       "estadio_id": "azteca",
       "eventos": []

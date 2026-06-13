@@ -32,15 +32,27 @@
 
 body {
   background-color: var(--azul-noche);
+  /* Multi-layer background: radial glow desde arriba + líneas diagonales tipo cancha */
+  background-image:
+    radial-gradient(ellipse 90% 45% at 50% -2%, rgba(27,58,107,0.6) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 30% at 95% 105%, rgba(200,146,42,0.055) 0%, transparent 55%),
+    repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 80px,
+      rgba(27,58,107,0.04) 80px,
+      rgba(27,58,107,0.04) 81px
+    );
+  background-attachment: fixed;
   color: var(--blanco);
   font-family: 'Barlow', system-ui, sans-serif;
   overflow-x: hidden;
 }
 
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--azul-medio); }
-::-webkit-scrollbar-thumb { background: var(--oro); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--oro-claro); }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(200,146,42,0.35); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200,146,42,0.6); }
 
 
 /* ─────────────────────────────────────────────────────────────
@@ -130,6 +142,29 @@ body {
   .animate-fade-in   { animation: fadeIn  0.4s ease forwards; }
   .animate-shimmer   { animation: shimmer 2.5s infinite linear; }
   .animate-spin-slow { animation: spin-slow 8s linear infinite; }
+  .animate-bounce-ball { animation: bounce-ball 1s ease-in-out infinite; }
+
+  /* Texto dorado con gradiente metálico — para títulos premium */
+  .text-gold-gradient {
+    background: linear-gradient(90deg, #C8922A 0%, #E5B857 40%, #f0cc6e 55%, #E5B857 65%, #C8922A 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 5s linear infinite;
+  }
+
+  /* Card con gradiente diagonal — reemplaza el fondo plano */
+  .card-gradient {
+    background: linear-gradient(135deg, #152238 0%, #0D1929 55%, #111E30 100%);
+    border: 1px solid rgba(27,58,107,0.7);
+  }
+
+  /* Separador horizontal dorado decorativo */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(200,146,42,0.7) 30%, #E5B857 50%, rgba(200,146,42,0.7) 70%, transparent 100%);
+  }
 }
 
 

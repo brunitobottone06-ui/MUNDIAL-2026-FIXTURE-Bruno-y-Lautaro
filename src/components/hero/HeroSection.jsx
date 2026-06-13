@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react'
 import gsap from 'gsap'
 import Countdown from './Countdown.jsx'
+import { FlagImg } from '../../utils/flagUtils.jsx'
 
 /* ─── Mouse-follow spotlight ──────────────────────────────────────── */
 function useMouseGlow(ref) {
@@ -76,7 +77,7 @@ export default function HeroSection({ onNavigate }) {
         ref={bgRef}
         className="absolute inset-[-10%] will-change-transform"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=1920&q=80'), linear-gradient(135deg, #0A1628, #152238)`,
+          backgroundImage: `url('https://i.pinimg.com/736x/0f/d9/1f/0fd91feeb1ae914db7649ba8e07d47e0.jpg'), linear-gradient(135deg, #0A1628, #152238)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -148,9 +149,9 @@ export default function HeroSection({ onNavigate }) {
         {/* Subtítulo */}
         <p className="hero-sub font-condensed text-gris tracking-[4px] text-sm sm:text-lg mb-10">
           11 JUN — 19 JUL &nbsp;
-          <span className="text-blanco font-semibold">USA</span> &nbsp;·&nbsp;
-          <span className="text-blanco font-semibold">CANADÁ</span> &nbsp;·&nbsp;
-          <span className="text-blanco font-semibold">MÉXICO</span>
+          <span className="text-blanco font-semibold inline-flex items-center gap-1.5"><FlagImg code="USA" alt="USA" size={22} /> USA</span> &nbsp;·&nbsp;
+          <span className="text-blanco font-semibold inline-flex items-center gap-1.5"><FlagImg code="CAN" alt="Canadá" size={22} /> CANADÁ</span> &nbsp;·&nbsp;
+          <span className="text-blanco font-semibold inline-flex items-center gap-1.5"><FlagImg code="MEX" alt="México" size={22} /> MÉXICO</span>
         </p>
 
         {/* Countdown */}
