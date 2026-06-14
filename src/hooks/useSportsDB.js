@@ -69,6 +69,9 @@ function normKey(name) {
 }
 
 async function buildAfCache() {
+  /* Sin key no hay requests — evita CORS en producción sin VITE_API_KEY */
+  if (!API_KEY) return {}
+
   /* 1 — Intentar localStorage */
   try {
     const raw = localStorage.getItem(AF_LS_KEY)

@@ -1,6 +1,5 @@
 export default async function handler(req, res) {
-  const parts   = Array.isArray(req.query.path) ? req.query.path : [req.query.path ?? '']
-  const subPath = '/' + parts.join('/')
+  const subPath = '/' + (req.query.path ?? '')
 
   const extra = { ...req.query }
   delete extra.path
